@@ -44,15 +44,20 @@
   let numTwo = '';
   const $operator = document.querySelector('#operator');
   const $result = document.querySelector('#result');
-  const onClickNumber = (event) => //{ // => 화살표 함수는 중괄호랑 return이 만나면 생략가능하다. 
+  const onClickNumber = (event) => { // => 화살표 함수는 중괄호랑 return이 만나면 생략가능하다. 
     //return 
-    (event) => {
-      if(operator) { // 비어있지 않다
-          numTwo += event.target.textContent;
-      } else { //비어있다
-          numOne += event.target.textContent;
-      }  
-      $result.value += event.target.textContent;
+    //(event) => {
+      if(!operator) { // 비어있다.
+        numOne += event.target.textContent;
+        $result.value += event.target.textContent;
+        return;
+      } 
+    //비어있지않다.
+      if(!numTwo){
+        $result.value = ''; // numTwo가 없으면 숫자를 지워라. 
+      }
+        numTwo += event.target.textContent;
+        $result.value += event.target.textContent;
      //}  
   }; // 고차 함수 (high order function) - 함수안에 함수
   document.querySelector('#num-0').addEventListener('click', onClickNumber);
